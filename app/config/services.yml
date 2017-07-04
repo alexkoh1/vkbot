@@ -1,0 +1,76 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    # makes classes in src/AppBundle available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    AppBundle\:
+        resource: '../../src/AppBundle/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+    AppBundle\Controller\:
+        resource: '../../src/AppBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    # add more services, or override services that need manual wiring
+    # AppBundle\Service\ExampleService:
+    #     arguments:
+    #         $someArgument: 'some_value'
+
+
+    #фабрика сервиса вк
+    app.vk_service_factory:
+        class: getjump\Vk\Core
+        calls:
+            - method: 'apiVersion'
+              arguments: ['5.5']
+            - method: 'setToken'
+              arguments: ['b2051944f22d9dcf6f28e3819a25ceabcf2a4557d99e0ea50a7362e63088ad7d837b4eb12d3e9c00c0771']
+
+    #сервис вк
+    app.vk_service:
+        class: getjump\Vk\Core
+        factory: ['@app.vk_service_factory', getInstance]
+
+
+
+    #сервис фотографий
+    app.photo_service:
+        class: AppBundle\Service\PhotoService
+
+    #комманда парсинга стены
+    app.wall_parse:
+        class: AppBundle\Command\WallParse
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    #комманда загрузки фотографий
+    app.upload_photo:
+        class: Appbundle\Command\UploadPhoto
+        arguments:
+            - '@app.photo_service'
+
+    #комманда создание записей
+    app.create_post:
+        class: AppBundle\Command\CreatePost
+        arguments:
+            - '@app.vk_service'
+            - '@doctrine.orm.entity_manager'
+            - '@app.photo_service'
