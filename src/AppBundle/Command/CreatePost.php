@@ -5,143 +5,105 @@ use AppBundle\AppBundle;
 use AppBundle\Entity\Attachment;
 use AppBundle\Entity\WallPost;
 use AppBundle\Service\PhotoService;
+use AppBundle\Service\WallService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use getjump\Vk\Core;
+use getjump\Vk\Model\Wall;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreatePost extends Command
 {
-    private $em;
-    private $vk;
-    private $photoService;
-    public function __construct(Core $vk, EntityManagerInterface $em, PhotoService $photoService, $name = null)
-    {
-        parent::__construct($name);
-        $this->em = $em;
-        $this->vk = $vk;
-        $this->photoService = $photoService;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
+    /**
+     * @var Core
+     */
+    private $vk;
+
+    /**
+     * @var PhotoService
+     */
+    private $photoService;
+
+    /**
+     * @var WallService
+     */
+    private $wallService;
+
+    /**
+     * @var string
+     */
+    private $ownerId = '413686536';
+
+    /**
+     * CreatePost constructor.
+     *
+     * @param Core                   $vk
+     * @param EntityManagerInterface $entityManager
+     * @param PhotoService           $photoService
+     * @param WallService            $wallService
+     * @param null                   $name
+     */
+    public function __construct(
+            Core $vk,
+            EntityManagerInterface $entityManager,
+            PhotoService $photoService,
+            WallService $wallService,
+            $name = null
+    ) {
+        parent::__construct($name);
+
+        $this->entityManager = $entityManager;
+        $this->photoService  = $photoService;
+        $this->wallService   = $wallService;
+
+        $this->vk = $vk;
     }
+
 
     protected function configure()
     {
         $this
             ->setName('app:create-post')
-
-            // the short description shown while running "php bin/console list"
-            ->setDescription('Creates a new user.')
-
-            ->setHelp('This command allows you to create a user...')
+            ->setDescription('Creates a new post to wall.')
+            ->setHelp('This command create a new post to wall.')
+            ->addArgument('destination_vk_id', InputArgument::REQUIRED, 'Please, enter destination vk id.')
+            ->addArgument('source_vk_id', InputArgument::REQUIRED, 'Please, enter source vk id. I should present in the database')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $posts = $this->em->getRepository('AppBundle\Entity\WallPost')->findBy(['isPosted' => 0]);
+        $destinationVkId = $input->getArgument('destination_vk_id');
+        $sourceVkId      = $input->getArgument('source_vk_id');
+
+        $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
+        $this->vk->setToken($vkToken->getAccessToken());
+
+        $params = [
+           'isPosted' => 0,
+           'fromId'  => $input->getArgument('source_vk_id'),
+        ];
+        $posts = $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
+
         foreach ($posts as $post) {
             //$attachments = $post->getAttachments();
-            $attachment = $this->createAttachmentToPost($post);
-            print_r($attachment);
+            $attachment = $this->wallService->createAttachmentToPost($post, $this->vk, $this->ownerId);
             $params = [
-                'owner_id' => '413686536',
+                'owner_id' => $this->ownerId,
                 'message' => $post->getText(),
                 'attachments' => $attachment,
             ];
-            $es = $this->vk->request('wall.post', $params)->getResponse();
+            $res = $this->vk->request('wall.post', $params)->getResponse();
             $post->setIsPosted(1);
-            $this->em->flush();
-            print_r($es);
+            $this->entityManager->flush();
         }
-    }
-
-    private function createAttachmentToPost(WallPost $wallPost){
-        $attachments = $wallPost->getAttachments();
-        $newAttachments = '';
-        foreach ($attachments as $attachment) {
-                $newAttachments = $newAttachments.$this->getNewMediaId($attachment).',';
-        }
-
-        return rtrim($newAttachments, ',');
-    }
-    private function getNewMediaId($attachment) {
-        if ($attachment->getType() == "photo") {
-            $newAttachments = $attachment->getPost()->getFromId() . '_' . $attachment->getUrl();
-            $params         = [
-                               'photos' => $newAttachments,
-                               'photo_sizes' => 1,
-                              ];
-            $res = $this->vk->request('photos.getById', $params)->getResponse();
-            $photoUrl = end($res[0]->sizes)->src;
-            $tempFilePath = '/tmp/tempfile.jpg';
-            file_put_contents($tempFilePath, fopen("$photoUrl", 'r'));
-            $newPhotoId = $this->photoService->uploadPhoto($tempFilePath);
-            return $newPhotoId;
-        } else {
-            $newAttachments = $attachment->getPost()->getFromId() . '_' . $attachment->getUrl();
-            return $attachment->getType().$newAttachments;
-        }
-    }
-
-    private function createPostAttachments(WallPost $post) {
-        $attachments = $post->getAttachments();
-        /*foreach ($attachments as $attachment) {
-            $attachment->
-        }*/
-    }
-    private function addRecordToDb($record)
-    {
-        $wallPost = new WallPost();
-        $wallPost->setVkId($record->id);
-        $wallPost->setFromId($record->from_id);
-        $wallPost->setToId($record->to_id);
-        $wallPost->setPostType($record->post_type);
-        $wallPost->setText($record->text);
-        $wallPost->setDate($record->date);
-
-        $postAttachment = new ArrayCollection();
-
-        $attachments = $record->attachments ?? null;
-
-        foreach ((array)$attachments as $key => $attachment) {
-            $allowAttachments = ['photo', 'posted_photo', 'audio', 'video'];
-            $postType = $attachment->type;
-            if (!in_array($postType, $allowAttachments)) {
-                continue;
-            }
-            $atomAttachment = new Attachment();
-            $atomAttachment->setType($postType);
-            $atomAttachment->setUrl($attachment->$postType->id);
-            $atomAttachment->setPost($wallPost);
-            $postAttachment->add($atomAttachment);
-        }
-
-        $wallPost->setAttachments($postAttachment);
-        $this->em->persist($wallPost);
-        $this->em->flush();
-    }
-
-    private function getLastRecordFromVk($offset) {
-        $requestParam = [
-            'owner_id' => 955435,
-            'count' => 1,
-            'offset' => $offset,
-            'filter' => 'owner',
-        ];
-        return $this->vk->request('wall.get', $requestParam)
-            ->fetchData()
-            ->one();
-
-    }
-    private function getLastRecordFromDb() {
-        return $this->em->createQueryBuilder()
-            ->select('e')
-            ->from('AppBundle:WallPost', 'e')
-            ->orderBy('e.vkId', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
     }
 }

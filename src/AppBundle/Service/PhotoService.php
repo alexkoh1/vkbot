@@ -9,16 +9,17 @@ use Symfony\Component\HttpFoundation\Request;
 class PhotoService
 {
     private $vk;
-    public function __construct()
+    public function __construct(Core $vk)
     {
-        $this->vk = Core::getInstance()->apiVersion('5.5')->setToken('7dca88bbe4a250e8be05a85a27afda0a882c3efeb21860c83e689824ed6c781038e0ad6f0c07cd2addc61');
+        $this->vk = $vk;
     }
-    private function getUploadUrl() {
-        return $this->vk->request('photos.getWallUploadServer')->fetchData()->getResponse()->upload_url;
+    private function getUploadUrl(Core $vk) {
+        return $vk->request('photos.getWallUploadServer')->fetchData()->getResponse()->upload_url;
     }
 
-    public function uploadPhoto($filePath) {
-        $uploadUrl = $this->getUploadUrl();
+    public function uploadPhoto(string $filePath, Core $vk, string $ownerId) {
+        $uploadUrl = $this->getUploadUrl($vk);
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $uploadUrl);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -28,11 +29,37 @@ class PhotoService
         curl_setopt($ch, CURLOPT_POSTFIELDS, ['photo' => new CURLFile($filePath)]);
         $data = json_decode(curl_exec($ch));
         curl_close($ch);
-        $params = ['user_id' => '413686536', 'photo' => $data->photo, 'server' => $data->server, 'hash' => $data->hash];
-        $response = $this->vk->request('photos.saveWallPhoto', $params)->fetchData();
+        $params = [
+            'user_id' => $ownerId,
+            'photo'   => $data->photo,
+            'server'  => $data->server,
+            'hash'    => $data->hash
+        ];
+
+        $response = $vk->request('photos.saveWallPhoto', $params)->fetchData();
         $photoId = 'photo'.$response->items[0]->owner_id.'_'.$response->items[0]->id;
 
         return $photoId;
         //print_r($this->vk->request('wall.post', ['owner_id' => '413686536', 'message' => 'test text', 'attachments' => $attachments])->fetchData());
+    }
+
+    /**
+     * Скачивает фото в локальную ФС по ID
+     *
+     * @param $id
+     *
+     * @return string
+     */
+    public function downloadPhoto(string $id, Core $vk) {
+        $params = [
+            'photos' => $id,
+            'photo_sizes' => 1,
+        ];
+
+        $res = $vk->request('photos.getById', $params)->getResponse();
+        $photoUrl = end($res[0]->sizes)->src;
+        $tempFilePath = '/tmp/'.$id.'.jpg';
+        file_put_contents($tempFilePath, fopen($photoUrl, 'r'));
+        return $tempFilePath;
     }
 }

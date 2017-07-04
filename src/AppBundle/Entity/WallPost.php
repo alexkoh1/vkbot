@@ -42,6 +42,8 @@ class WallPost
      */
     private $text;
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Attachment", mappedBy="post", cascade={"persist"})
      */
     private $attachments;
@@ -227,7 +229,7 @@ class WallPost
     /**
      * Get attachments
      *
-     * @return integer
+     * @return ArrayCollection
      */
     public function getAttachments()
     {

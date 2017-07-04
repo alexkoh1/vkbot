@@ -34,6 +34,11 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    app.monolog_web_processor:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments:
+            - 'monolog.logger'
+            - 'file_log'
 
     #фабрика сервиса вк
     app.vk_service_factory:
@@ -41,25 +46,29 @@ services:
         calls:
             - method: 'apiVersion'
               arguments: ['5.5']
-            - method: 'setToken'
-              arguments: ['b2051944f22d9dcf6f28e3819a25ceabcf2a4557d99e0ea50a7362e63088ad7d837b4eb12d3e9c00c0771']
-
-    #сервис вк
-    app.vk_service:
-        class: getjump\Vk\Core
-        factory: ['@app.vk_service_factory', getInstance]
-
-
 
     #сервис фотографий
     app.photo_service:
         class: AppBundle\Service\PhotoService
+        arguments:
+            - '@app.vk_service_factory'
 
-    #комманда парсинга стены
+    #Сервис стены
+    app.wall_service:
+        class: AppBundle\Service\WallService
+        arguments:
+            - '@app.photo_service'
+            - '@doctrine.orm.entity_manager'
+
+    #Комманда парсинга стены
     app.wall_parse:
         class: AppBundle\Command\WallParse
         arguments:
+            - '@app.wall_service'
+            - '@app.vk_service_factory'
             - '@doctrine.orm.entity_manager'
+        tags:
+            - console.command
 
     #комманда загрузки фотографий
     app.upload_photo:
@@ -71,6 +80,9 @@ services:
     app.create_post:
         class: AppBundle\Command\CreatePost
         arguments:
-            - '@app.vk_service'
+            - '@app.vk_service_factory'
             - '@doctrine.orm.entity_manager'
             - '@app.photo_service'
+            - '@app.wall_service'
+        tags:
+            - console.command

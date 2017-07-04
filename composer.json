@@ -25,6 +25,7 @@
         "doctrine/orm": "^2.5",
         "getjump/vk": "*",
         "incenteev/composer-parameter-handler": "^2.0",
+        "monolog/monolog": "^1.23",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/console": "^3.3",
