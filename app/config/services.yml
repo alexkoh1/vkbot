@@ -7,9 +7,9 @@ services:
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services
-        autowire: true
+        autowire: false
         # automatically registers your services as commands, event subscribers, etc.
-        autoconfigure: true
+        autoconfigure: false
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
@@ -52,6 +52,7 @@ services:
         class: AppBundle\Service\PhotoService
         arguments:
             - '@app.vk_service_factory'
+            - '@doctrine.orm.entity_manager'
 
     #Сервис стены
     app.wall_service:
@@ -72,9 +73,13 @@ services:
 
     #комманда загрузки фотографий
     app.upload_photo:
-        class: Appbundle\Command\UploadPhoto
+        class: AppBundle\Command\UploadPhoto
         arguments:
             - '@app.photo_service'
+            - '@app.vk_service_factory'
+
+        tags:
+            -  { name: console.command }
 
     #комманда создание записей
     app.create_post:
@@ -84,5 +89,6 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@app.photo_service'
             - '@app.wall_service'
+            - '@logger'
         tags:
-            - console.command
+            -  { name: console.command }

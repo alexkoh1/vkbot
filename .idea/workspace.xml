@@ -2,61 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c023291b-e72c-445f-ac68-58ecbdf4582e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/-/C/0gTAdmKOggEUtQPg82-D" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/2/E/74sCLaPIbY-r8oRIB+KX" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/4/P/50fk9HCIpbSL90nP4Ov3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/4/R/PTSHBCku3C12SyJ7Gq8q" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/7/T/9muAs7dXoXgrv9HiHTYS" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/8/L/R5JiVtuKuRWIox-np1zR" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/B/A/2zP7YPM5T0325JG3gFxp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/B/P/Q0bCsvnxMLESAOUh2+o7" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/C/N/SMfQMeCi8w1wdsLZ4W9e" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/D/J/zoTjmeSwCULCPfRECHoV" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/D/X/FFJ8tapYdqZw5Cxoisug" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/F/+/iMsQMdBtI-yW++L2MYfv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/I/2/2jV7JpbeRe8sRxeBbXFg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/I/K/jqRiMH9sWLplfbArEZrs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/I/Y/WYLzSVSGUzfgkjSc6TF7" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/I/Y/va7Y42sKsh31ja5ljpMZ" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/K/H/cDz-e-MFDyQg78PQFXq7" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/K/I/eEh6alj7u8D9OXXq6LL1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/K/K/s9t4v0aZx+ffZfAnoEg5" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/L/+/M1lIa5TC1B1AhOlWTP2g" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/M/V/ZLCWlW6zD+xsAxWx5Ss0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/O/M/3DnqT+IIOJ4sNYgduRwO" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/P/R/+4x6lKn+0ofgJW1-Tw9j" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/Q/Z/ib42WZpl2rLNQi4MM7CF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/R/M/ZwUaSMg9CNGMJCRM0QC+" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/U/-/XM+z2FVknDX66FXmZlsV" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/V/C/fO4+rQClbRgZh-TZdD5i" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/V/H/kOJmddRy5LuEzUBzadnz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/V/O/RLXWuW+-Si3hgVZSCiu9" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/cache/dev/pools/JorbCfhqa2/Y/Z/-IeC5EVPc8tWd-tTb+zc" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Album.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Photo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Task.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/TaskType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/sqlite.db" afterPath="$PROJECT_DIR$/app/sqlite.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/7c44db12-9d9d-4191-ae3d-64e83a911dfb.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/7c44db12-9d9d-4191-ae3d-64e83a911dfb.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Command/PrimaryWallParse.php" afterPath="$PROJECT_DIR$/src/AppBundle/Command/PrimaryWallParse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Command/WallParse.php" afterPath="$PROJECT_DIR$/src/AppBundle/Command/WallParse.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php.meta" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml.meta" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerCompiler.log" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerCompiler.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerDeprecations.log" afterPath="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainerDeprecations.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/var/logs/dev.log" afterPath="$PROJECT_DIR$/var/logs/dev.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/CHANGELOG.md" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/composer.json" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Formatter/GelfMessageFormatter.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Formatter/GelfMessageFormatter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/ChromePHPHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/ChromePHPHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/DynamoDbHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/DynamoDbHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/HandlerWrapper.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/HandlerWrapper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/RollbarHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/RollbarHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SlackHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SlackHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SlackWebhookHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SlackWebhookHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SwiftMailerHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SwiftMailerHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SyslogUdpHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/SyslogUdpHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Processor/IntrospectionProcessor.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Processor/IntrospectionProcessor.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/services.yml" afterPath="$PROJECT_DIR$/app/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php" afterPath="$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php" afterPath="$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php" afterPath="$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -96,24 +53,6 @@
         <option name="myItemId" value="main" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="wall_post" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="sqlite.db" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="main" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
     </PATH>
     <PATH>
       <PATH_ELEMENT>
@@ -129,7 +68,35 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
       <PATH_ELEMENT>
-        <option name="myItemId" value="bot" />
+        <option name="myItemId" value="sqlite_master" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="identifier.sqlite" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="identifier.sqlite" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="main" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="sqlite_master" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -137,50 +104,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="144">
-      <file leaf-file-name="main.bot" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.bot">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreatePost.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php">
+      <file leaf-file-name="PhotoService.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="74" column="59" lean-forward="true" selection-start-line="74" selection-start-column="59" selection-end-line="74" selection-end-column="59" />
+            <state relative-caret-position="34">
+              <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
               <folding>
-                <element signature="e#36#60#0#PHP" expanded="true" />
-                <element signature="e#2381#2403#1#PHP" expanded="true" />
-                <element signature="e#2670#2697#1#PHP" expanded="true" />
+                <element signature="e#37#64#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhotoService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php">
+      <file leaf-file-name="UploadPhoto.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bot.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Bot.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+            <state relative-caret-position="388">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -189,40 +129,71 @@
       <file leaf-file-name="WallParse.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/WallParse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state relative-caret-position="147">
+              <caret line="46" column="117" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="117" />
               <folding>
                 <element signature="e#36#60#0#PHP" expanded="true" />
-                <element signature="e#2061#2088#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WallService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/WallService.php">
+      <file leaf-file-name="CreatePost.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+            <state relative-caret-position="226">
+              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="96" selection-end-column="56" />
               <folding>
-                <element signature="e#39#71#0#PHP" expanded="true" />
+                <element signature="e#36#60#0#PHP" expanded="true" />
+                <element signature="e#2601#2623#1#PHP" expanded="true" />
+                <element signature="e#2890#2917#1#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <file leaf-file-name="PrimaryWallParse.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/PrimaryWallParse.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="69" column="16" lean-forward="false" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="16" />
+            <state relative-caret-position="16">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.wall_post" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.wall_post">
+      <file leaf-file-name="Photo.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Photo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="53" column="12" lean-forward="false" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Console/Application.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16">
+              <caret line="893" column="0" lean-forward="false" selection-start-line="893" selection-start-column="0" selection-end-line="893" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.photo" pinned="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.photo">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -236,42 +207,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+      <file leaf-file-name="main.sqlite_master" pinned="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.sqlite_master">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Application.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Console/Application.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="893" column="0" lean-forward="false" selection-start-line="893" selection-start-column="0" selection-end-line="893" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WallPost.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WallPost.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="51" column="34" lean-forward="true" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Logger.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bridge/Monolog/Logger.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="38" column="22" lean-forward="false" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
-              <folding />
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -280,7 +226,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>f</find>
       <find>fria</find>
       <find>fri</find>
       <find>frie</find>
@@ -310,7 +255,11 @@
       <find>query</find>
       <find>cons</find>
       <find>create</find>
+      <find>ORMColumn</find>
     </findStrings>
+    <replaceStrings>
+      <replace>ORM\Column</replace>
+    </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk</dir>
     </dirStrings>
@@ -325,18 +274,23 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Command/CreateUserCommand.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Attachment.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/AppBundle.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Command/WallPost.php" />
         <option value="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Command/PrimaryWallParse.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/CopyTask.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/WallPost.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Bot.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/WallService.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Command/WallParse.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/TaskType.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/WorkingTime.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Album.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Task.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Entity/Photo.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Command/WallParse.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
       </list>
     </option>
@@ -350,10 +304,11 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.6" />
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 7" />
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1055" />
+    <option name="x" value="1919" />
+    <option name="width" value="1922" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -381,6 +336,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="vkbot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vkbot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vkbot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="var" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vkbot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vkbot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="var" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logs" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -609,7 +596,7 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration default="false" name="Unnamed" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/bin/console" scriptParameters="app:create-post 413686536 94521049">
+    <configuration default="false" name="Unnamed" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/bin/console" scriptParameters="app:upload-photo">
       <method />
     </configuration>
     <list size="1">
@@ -637,6 +624,7 @@
       <workItem from="1499113790967" duration="27000" />
       <workItem from="1499113848262" duration="1327000" />
       <workItem from="1499154233863" duration="21285000" />
+      <workItem from="1499193514058" duration="8224000" />
     </task>
     <task id="LOCAL-00001" summary="Developing">
       <created>1499184934525</created>
@@ -649,27 +637,28 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67006000" />
+    <option name="totallyTimeSpent" value="75230000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1055" extended-state="0" />
+    <frame x="1919" y="0" width="1922" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1881663" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19284189" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.102345414" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938644" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21367522" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32831" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34553283" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3538634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938644" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -688,18 +677,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php</url>
-          <line>97</line>
+          <line>106</line>
           <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php</url>
-          <line>58</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php</url>
-          <line>20</line>
-          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/AppBundle/Command/WallParse.php</url>
@@ -708,16 +687,20 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php</url>
-          <line>87</line>
+          <line>96</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php</url>
+          <line>34</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="29" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PhpLocalRunConfigurationType">
-        <watch expression="$id" language="PHP" />
-        <watch expression="$vkToken-&gt;getAccessToken()" language="PHP" />
+        <watch expression="'Wall post https://vk.com/wall'.$post-&gt;getFromId().'_'.$post-&gt;getVkId(). 'was copied to https://vk.com/wall'.$this-&gt;ownerId.'_'.$res-&gt;post_id" language="PHP" />
       </configuration>
     </watches-manager>
   </component>
@@ -734,107 +717,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Wrapper/Friends.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Wrapper/BaseWrapper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Wrapper/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Wrapper/Photos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2088">
-          <caret line="117" column="20" lean-forward="false" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/RequestTransaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1296">
-          <caret line="76" column="20" lean-forward="false" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Response/Response.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1602">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Attachment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Response/Response.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1424">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Wrapper/BaseWrapper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/getjump/vk/src/getjump/Vk/Wrapper/Friends.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity.php" />
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7c44db12-9d9d-4191-ae3d-64e83a911dfb/console.sql" />
-    <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Handler/CurlMultiHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/collections/lib/Doctrine/Common/Collections/ArrayCollection.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -858,7 +740,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="558" column="0" lean-forward="false" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -866,7 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -874,7 +754,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -882,7 +761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -890,7 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -898,7 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-718">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -906,7 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -914,9 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-376">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#38#72#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -924,14 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1298">
           <caret line="168" column="20" lean-forward="false" selection-start-line="168" selection-start-column="20" selection-end-line="168" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/PrimaryWallParse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -948,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -956,7 +819,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -969,7 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -977,14 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -997,19 +850,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="69" column="16" lean-forward="false" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bridge/Monolog/Logger.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
+        <state relative-caret-position="480">
           <caret line="38" column="22" lean-forward="false" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
-          <folding />
+          <folding>
+            <element signature="e#7#236#0#PHP" expanded="false" />
+            <element signature="e#273#306#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1026,6 +874,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WallPost.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="51" column="34" lean-forward="false" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+          <folding>
+            <element signature="e#36#84#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/WallService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#71#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.bot">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1039,75 +907,262 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Bot.php">
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+        <state relative-caret-position="464">
+          <caret line="73" column="24" lean-forward="false" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Console/Application.php">
+    <entry file="file://$PROJECT_DIR$/var/logs/dev.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="893" column="0" lean-forward="false" selection-start-line="893" selection-start-column="0" selection-end-line="893" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="130" column="38" lean-forward="false" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Bot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="22" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/TaskType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="18" />
+          <folding>
+            <marker date="1499197027020" expanded="true" signature="139:798" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.task_type">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WorkingTime.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.task">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Task.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="31" column="70" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Album.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="15" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.album">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/3cc8d11d-db3a-4ff4-994c-a0bad634227c/main.sqlite_master">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.sqlite_master">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Photo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.album">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.album">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.album">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.photo">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d8bc0595/7c44db12-9d9d-4191-ae3d-64e83a911dfb/main.album">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/PrimaryWallParse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/WallParse.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        <state relative-caret-position="147">
+          <caret line="46" column="117" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="117" />
           <folding>
             <element signature="e#36#60#0#PHP" expanded="true" />
-            <element signature="e#2061#2088#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/WallPost.php">
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Console/Application.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="51" column="34" lean-forward="true" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/WallService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding>
-            <element signature="e#39#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state relative-caret-position="16">
+          <caret line="893" column="0" lean-forward="false" selection-start-line="893" selection-start-column="0" selection-end-line="893" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/CreatePost.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="74" column="59" lean-forward="true" selection-start-line="74" selection-start-column="59" selection-end-line="74" selection-end-column="59" />
+        <state relative-caret-position="226">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="96" selection-end-column="56" />
           <folding>
             <element signature="e#36#60#0#PHP" expanded="true" />
-            <element signature="e#2381#2403#1#PHP" expanded="true" />
-            <element signature="e#2670#2697#1#PHP" expanded="true" />
+            <element signature="e#2601#2623#1#PHP" expanded="true" />
+            <element signature="e#2890#2917#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Command/UploadPhoto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="53" column="12" lean-forward="false" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/PhotoService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+          <folding>
+            <element signature="e#37#64#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

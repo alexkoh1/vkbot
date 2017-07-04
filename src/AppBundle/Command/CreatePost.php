@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use getjump\Vk\Core;
 use getjump\Vk\Model\Wall;
+use Monolog\Logger;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,7 +41,12 @@ class CreatePost extends Command
     /**
      * @var string
      */
-    private $ownerId = '413686536';
+    private $ownerId;
+
+    /**
+     * @var Logger
+     */
+    private $logger;
 
     /**
      * CreatePost constructor.
@@ -50,12 +56,14 @@ class CreatePost extends Command
      * @param PhotoService           $photoService
      * @param WallService            $wallService
      * @param null                   $name
+     * @param Logger                 $logger
      */
     public function __construct(
             Core $vk,
             EntityManagerInterface $entityManager,
             PhotoService $photoService,
             WallService $wallService,
+            Logger $logger,
             $name = null
     ) {
         parent::__construct($name);
@@ -63,7 +71,7 @@ class CreatePost extends Command
         $this->entityManager = $entityManager;
         $this->photoService  = $photoService;
         $this->wallService   = $wallService;
-
+        $this->logger        = $logger;
         $this->vk = $vk;
     }
 
@@ -83,6 +91,7 @@ class CreatePost extends Command
     {
         $destinationVkId = $input->getArgument('destination_vk_id');
         $sourceVkId      = $input->getArgument('source_vk_id');
+        $this->ownerId   = $destinationVkId;
 
         $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
         $this->vk->setToken($vkToken->getAccessToken());
@@ -97,13 +106,14 @@ class CreatePost extends Command
             //$attachments = $post->getAttachments();
             $attachment = $this->wallService->createAttachmentToPost($post, $this->vk, $this->ownerId);
             $params = [
-                'owner_id' => $this->ownerId,
+                'owner_id' => $this->ownerId.'1',
                 'message' => $post->getText(),
                 'attachments' => $attachment,
             ];
             $res = $this->vk->request('wall.post', $params)->getResponse();
             $post->setIsPosted(1);
             $this->entityManager->flush();
+            $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$this->ownerId.'_'.$res->post_id);
         }
     }
 }

@@ -2,16 +2,20 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Album;
 use CURLFile;
+use Doctrine\ORM\EntityManager;
 use getjump\Vk\Core;
 use Symfony\Component\HttpFoundation\Request;
 
 class PhotoService
 {
     private $vk;
-    public function __construct(Core $vk)
+    private $entityManager;
+    public function __construct(Core $vk, EntityManager $entityManager)
     {
         $this->vk = $vk;
+        $this->entityManager = $entityManager;
     }
     private function getUploadUrl(Core $vk) {
         return $vk->request('photos.getWallUploadServer')->fetchData()->getResponse()->upload_url;
@@ -61,5 +65,14 @@ class PhotoService
         $tempFilePath = '/tmp/'.$id.'.jpg';
         file_put_contents($tempFilePath, fopen($photoUrl, 'r'));
         return $tempFilePath;
+    }
+
+    public function getAlbums(int $ownerId, Core $vk) {
+        $params = [
+            'owner_id' => $ownerId,
+        ];
+        $album = $vk->request('photos.getAlbums', $params)->getResponse();
+
+        print 'hui';
     }
 }

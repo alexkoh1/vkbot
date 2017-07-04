@@ -5,6 +5,7 @@ namespace AppBundle\Command;
 
 
 use AppBundle\Service\PhotoService;
+use getjump\Vk\Core;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,10 +13,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 class UploadPhoto extends Command
 {
     private $photoService;
-    public function __construct(PhotoService $photoService, $name = null)
+    private $vk;
+    public function __construct(PhotoService $photoService, Core $vk, $name = null)
     {
         parent::__construct($name);
+
         $this->photoService = $photoService;
+        $this->vk = $vk;
+        $this->vk->setToken('fbb3115711ee27ad33a15adec5a4184ee3a1adf0704a1032fd52d1d93b89a61014fcd3706378fefa02916');
     }
 
     protected function configure()
@@ -27,6 +32,6 @@ class UploadPhoto extends Command
         ;
     }
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $this->photoService->uploadPhoto();
+        $this->photoService->getAlbums(955435, $this->vk);
     }
 }
