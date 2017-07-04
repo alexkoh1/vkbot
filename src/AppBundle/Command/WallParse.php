@@ -4,103 +4,75 @@ namespace AppBundle\Command;
 use AppBundle\AppBundle;
 use AppBundle\Entity\Attachment;
 use AppBundle\Entity\WallPost;
+use AppBundle\Service\WallService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use getjump\Vk\Core;
+use Monolog\Logger;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class WallParse extends Command
 {
-    private $em;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var Core
+     */
     private $vk;
-    public function __construct(EntityManagerInterface $em, $name = null)
+
+    /**
+     * @var WallService
+     */
+    private $wallService;
+
+    /**
+     * @var string
+     */
+    private $ownerId;
+
+    private $logger;
+
+    public function __construct(WallService $wallService, Core $vk, EntityManagerInterface $entityManager, $name = null)
     {
         parent::__construct($name);
-        $this->em = $em;
-        $this->vk = Core::getInstance()->apiVersion('5.5')->setToken('4c3bb1a99107b7b57fccb8da53f37eae1eb8dc61ae15099c7940524b7ddcc2345e008eb46c74ac0cbf59a');
-
+        $this->wallService   = $wallService;
+        $this->entityManager = $entityManager;
+        $this->vk            = $vk;
+        $this->vk->setToken('fbb3115711ee27ad33a15adec5a4184ee3a1adf0704a1032fd52d1d93b89a61014fcd3706378fefa02916');
     }
 
     protected function configure()
     {
         $this
-            ->setName('app:create-user')
-
-            // the short description shown while running "php bin/console list"
-            ->setDescription('Creates a new user.')
-
-            ->setHelp('This command allows you to create a user...')
+            ->setName('app:wall-parse')
+            ->setDescription('Copy records from wall to database')
+            ->setHelp('This command copy records from user`s wall to local database.')
+            ->addArgument('source_vk_id', InputArgument::REQUIRED, 'Please, enter source vk id.')
         ;
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $lastRecordFromVk    = $this->getLastRecordFromVk(0);
-        $lastRecordFromDb = $this->getLastRecordFromDb();
+        $this->ownerId = $input->getArgument('source_vk_id');
+        $recordsFromVk = $this->wallService->getPostsFromWall(20, 0, $this->ownerId, $this->vk);
 
-        $count = $lastRecordFromVk->id - $lastRecordFromDb->getVkId();
-
-        $this->vk->request('wall.get', ['owner_id' => 955435, 'count' => $count-1])->each(function($i, $v) {
-            $post = $this->em->getRepository('AppBundle\Entity\WallPost')->findByVkId($v->id);
-            if ($v->post_type == 'post' and !$post) {
-                $this->addRecordToDb($v);
+        foreach ($recordsFromVk as $record) {
+            $params = [
+                'vkId'    => $record->id,
+                'fromId' => $this->ownerId,
+            ];
+            $post = $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
+            if ($record->post_type == 'post' && !$post) {
+                $this->wallService->addRecordToDb($record);
+                //$this->logger->addInfo('Vk post');
             }
-        });
-    }
-
-    private function addRecordToDb($record)
-    {
-        $wallPost = new WallPost();
-        $wallPost->setVkId($record->id);
-        $wallPost->setFromId($record->from_id);
-        $wallPost->setToId($record->to_id);
-        $wallPost->setPostType($record->post_type);
-        $wallPost->setText($record->text);
-        $wallPost->setDate($record->date);
-
-        $postAttachment = new ArrayCollection();
-
-        $attachments = $record->attachments ?? null;
-
-        foreach ((array)$attachments as $key => $attachment) {
-            $allowAttachments = ['photo', 'posted_photo', 'audio', 'video'];
-            $postType = $attachment->type;
-            if (!in_array($postType, $allowAttachments)) {
-                continue;
-            }
-            $atomAttachment = new Attachment();
-            $atomAttachment->setType($postType);
-            $atomAttachment->setUrl($attachment->$postType->id);
-            $atomAttachment->setPost($wallPost);
-            $postAttachment->add($atomAttachment);
         }
-
-        $wallPost->setAttachments($postAttachment);
-        $this->em->persist($wallPost);
-        $this->em->flush();
-    }
-
-    private function getLastRecordFromVk($offset) {
-        $requestParam = [
-            'owner_id' => 955435,
-            'count' => 1,
-            'offset' => $offset,
-            'filter' => 'owner',
-        ];
-        return $this->vk->request('wall.get', $requestParam)
-            ->fetchData()
-            ->one();
-
-    }
-    private function getLastRecordFromDb() {
-        return $this->em->createQueryBuilder()
-            ->select('e')
-            ->from('AppBundle:WallPost', 'e')
-            ->orderBy('e.vkId', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
     }
 }

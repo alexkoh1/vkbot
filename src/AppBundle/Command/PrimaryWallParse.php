@@ -13,24 +13,30 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PrimaryWallParse extends Command
 {
+    /**
+     * Entity Manager
+     *
+     * @var EntityManagerInterface
+     */
     private $em;
+
+    /**
+     * @var Core
+     */
     private $vk;
-    public function __construct(EntityManagerInterface $em, $name = null)
+    public function __construct(Core $vk, EntityManagerInterface $em, $name = null)
     {
         parent::__construct($name);
-        $this->em = $em;
-        $this->vk = Core::getInstance()->apiVersion('5.5')->setToken('4c3bb1a99107b7b57fccb8da53f37eae1eb8dc61ae15099c7940524b7ddcc2345e008eb46c74ac0cbf59a');
 
+        $this->em = $em;
+        $this->vk = $vk;
     }
 
     protected function configure()
     {
         $this
             ->setName('app:primary-wall-copy')
-
-            // the short description shown while running "php bin/console list"
             ->setDescription('Creates a new user.')
-
             ->setHelp('This command allows you to create a user...')
         ;
     }
