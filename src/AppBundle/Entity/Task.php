@@ -54,14 +54,19 @@ class Task
     private $pause_to;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $working_time_from;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $working_time_to;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $status;
     /**
      * Get id
      *
@@ -286,5 +291,29 @@ class Task
     public function getWorkingTimeTo()
     {
         return $this->working_time_to;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Task
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
