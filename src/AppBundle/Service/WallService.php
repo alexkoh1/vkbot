@@ -143,22 +143,19 @@ class WallService
         $this->entityManager->flush();
     }
 
-    public function createPost($destinationVkId, $sourceVkId, $lastPostVkId)
+    /**
+     * Создаёт пост на стене ВК
+     *
+     * @param string   $destinationVkId
+     * @param WallPost $post
+     *
+     * @return boolean
+     */
+    public function createPost(string $destinationVkId, WallPost $post)
     {
-        $ownerId   = $destinationVkId;
-
+        $ownerId = $destinationVkId;
         $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
         $this->vk->setToken($vkToken->getAccessToken());
-
-        $post = $this->entityManager
-            ->getRepository('AppBundle:WallPost')
-            ->createQueryBuilder('e')
-            ->where('e.fromId = '.$sourceVkId)
-            ->andWhere('e.vkId > '.$lastPostVkId)
-            ->orderBy('e.id', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleResult();
 
         //$attachments = $post->getAttachments();
         $attachment = $this->createAttachmentToPost($post, $this->vk, $ownerId);
@@ -168,8 +165,7 @@ class WallService
             'attachments' => $attachment,
         ];
         $res = $this->vk->request('wall.post', $params)->getResponse();
-        $post->setIsPosted(1);
-        $this->entityManager->flush();
-        $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$this->ownerId.'_'.$res->post_id);
+        $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$ownerId.'_'.$res->post_id);
+        return true;
     }
 }

@@ -60,15 +60,17 @@ class Worker extends Command
     {
         $currentTasks = $this->getCurrentTasks();
         foreach ($currentTasks as $task) {
-            $lastVkId = $this->taskRepository->getVkIdOfLastPostedRecord($task);
+            $post = $this->taskRepository->getNextPost($task);
+            if ($this->wallService->createPost($task->getToId(), $post)) {
+                $taskLog = new TaskLog();
+                $taskLog->setRecordId($post);
+                $taskLog->setStatus(1);
+                $taskLog->setTaskId($task);
+                $taskLog->setTime(new \DateTime());
+                $this->entityManager->persist($taskLog);
+                $this->entityManager->flush();
+            }
 
-            $this->wallService->createPost(
-                $task->getToId(),
-                $task->getFromId(),
-                $lastVkId
-            );
-
-            $log = new TaskLog();
         }
     }
 
@@ -105,16 +107,16 @@ class Worker extends Command
         if ($start_time <= $now && $now < $end_time) {
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 
     private function isInPause(Task $task)
     {
         $params = [
-            'id' => $task->getId()
+            'taskId' => $task->getId()
         ];
-        $lastLog = $this->entityManager->getRepository(TaskLog::class)->findOneBy($params);
+        $lastLog = $this->entityManager->getRepository(TaskLog::class)->findOneBy($params, ['id' => 'DESC']);
         if ($lastLog) {
             $lastTime = $lastLog->getTime();
         } else {
@@ -126,10 +128,10 @@ class Worker extends Command
 
         $diff = $now->diff($lastTime);
 
-        if ($pauseFrom >= $diff) {
+        if ($diff >= $pauseFrom) {
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 }

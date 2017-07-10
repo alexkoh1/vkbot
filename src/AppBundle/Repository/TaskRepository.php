@@ -4,7 +4,9 @@ namespace AppBundle\Repository;
 
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\WallPost;
 use Doctrine\ORM\EntityManager;
+use getjump\Vk\Model\Wall;
 
 class TaskRepository
 {
@@ -19,13 +21,29 @@ class TaskRepository
     }
 
     /**
+     * Получает из базы пост для постинга
+     */
+    public function getPostToCreate($sourceVkId, $lastPostVkId) {
+        $post = $this->entityManager
+            ->getRepository('AppBundle:WallPost')
+            ->createQueryBuilder('e')
+            ->where('e.fromId = '.$sourceVkId)
+            ->andWhere('e.vkId > '.$lastPostVkId)
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+
+    /**
      * Получает vkId последней опубликованной от имени определенного пользователя записи
      *
      * @param Task $task
      *
-     * @return int
+     * @return WallPost
      */
-    public function getVkIdOfLastPostedRecord(Task $task): int
+    public function getNextPost(Task $task): WallPost
     {
         $fromId = $task->getFromId();
         $entity = $this->entityManager
@@ -40,9 +58,21 @@ class TaskRepository
             ->getOneOrNullResult();
 
         if ($entity) {
-            return $entity->vkId;
+            $lastPostVkId = $entity['vkId'];
         } else {
-            return 0;
+            $lastPostVkId = 0;
         }
+
+        $post = $this->entityManager
+            ->getRepository('AppBundle:WallPost')
+            ->createQueryBuilder('e')
+            ->where('e.fromId = '.$fromId)
+            ->andWhere('e.vkId > '.$lastPostVkId)
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+
+        return $post;
     }
 }
