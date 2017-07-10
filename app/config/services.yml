@@ -60,6 +60,9 @@ services:
         arguments:
             - '@app.photo_service'
             - '@doctrine.orm.entity_manager'
+            - '@app.vk_service_factory'
+            - '@logger'
+
 
     #Комманда парсинга стены
     app.wall_parse:
@@ -98,5 +101,13 @@ services:
         class: AppBundle\Command\Worker
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '@app.wall_service'
+            - '@app.task_repository'
         tags:
             -  { name: console.command }
+
+    #репозиторий тасков
+    app.task_repository:
+        class: AppBundle\Repository\TaskRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'

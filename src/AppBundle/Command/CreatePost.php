@@ -3,10 +3,12 @@ namespace AppBundle\Command;
 
 use AppBundle\AppBundle;
 use AppBundle\Entity\Attachment;
+use AppBundle\Entity\TaskLog;
 use AppBundle\Entity\WallPost;
 use AppBundle\Service\PhotoService;
 use AppBundle\Service\WallService;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use getjump\Vk\Core;
 use getjump\Vk\Model\Wall;
@@ -60,7 +62,7 @@ class CreatePost extends Command
      */
     public function __construct(
             Core $vk,
-            EntityManagerInterface $entityManager,
+            EntityManager $entityManager,
             PhotoService $photoService,
             WallService $wallService,
             Logger $logger,
@@ -84,6 +86,7 @@ class CreatePost extends Command
             ->setHelp('This command create a new post to wall.')
             ->addArgument('destination_vk_id', InputArgument::REQUIRED, 'Please, enter destination vk id.')
             ->addArgument('source_vk_id', InputArgument::REQUIRED, 'Please, enter source vk id. I should present in the database')
+            ->addArgument('last_post_vk_id', InputArgument::REQUIRED, 'Please, the last post, that was posted to vk')
         ;
     }
 
@@ -91,6 +94,7 @@ class CreatePost extends Command
     {
         $destinationVkId = $input->getArgument('destination_vk_id');
         $sourceVkId      = $input->getArgument('source_vk_id');
+        $lastPostVkId      = $input->getArgument('last_post_vk_id');
         $this->ownerId   = $destinationVkId;
 
         $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
@@ -98,22 +102,30 @@ class CreatePost extends Command
 
         $params = [
            'isPosted' => 0,
-           'fromId'  => $input->getArgument('source_vk_id'),
+           'fromId'  => $sourceVkId,
         ];
-        $posts = $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
+        //$posts = $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
 
-        foreach ($posts as $post) {
+        $post = $this->entityManager
+            ->getRepository('AppBundle:WallPost')
+            ->createQueryBuilder('e')
+            ->where('e.fromId = '.$sourceVkId)
+            ->andWhere('e.vkId > '.$lastPostVkId)
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+
             //$attachments = $post->getAttachments();
-            $attachment = $this->wallService->createAttachmentToPost($post, $this->vk, $this->ownerId);
-            $params = [
-                'owner_id' => $this->ownerId.'1',
-                'message' => $post->getText(),
-                'attachments' => $attachment,
-            ];
-            $res = $this->vk->request('wall.post', $params)->getResponse();
-            $post->setIsPosted(1);
-            $this->entityManager->flush();
-            $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$this->ownerId.'_'.$res->post_id);
-        }
+        $attachment = $this->wallService->createAttachmentToPost($post, $this->vk, $this->ownerId);
+        $params = [
+            'owner_id' => $this->ownerId,
+            'message' => $post->getText(),
+            'attachments' => $attachment,
+        ];
+        $res = $this->vk->request('wall.post', $params)->getResponse();
+        $post->setIsPosted(1);
+        $this->entityManager->flush();
+        $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$this->ownerId.'_'.$res->post_id);
     }
 }

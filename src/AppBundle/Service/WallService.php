@@ -7,13 +7,15 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Attachment;
 use AppBundle\Entity\WallPost;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use getjump\Vk\Core;
+use Monolog\Logger;
 
 class WallService
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManager
      */
     private $entityManager;
     /**
@@ -22,15 +24,28 @@ class WallService
     private $photoService;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * WallService constructor.
      *
-     * @param PhotoService           $photoService
-     * @param EntityManagerInterface $entityManager
+     * @param PhotoService  $photoService
+     * @param EntityManager $entityManager
+     * @param Core          $vk
+     * @param Logger        $logger
      */
-    public function __construct(PhotoService $photoService, EntityManagerInterface $entityManager)
-    {
-        $this->photoService = $photoService;
+    public function __construct(
+        PhotoService $photoService,
+        EntityManager $entityManager,
+        Core $vk,
+        Logger $logger
+    ) {
+        $this->photoService  = $photoService;
         $this->entityManager = $entityManager;
+        $this->vk            = $vk;
+        $this->logger        = $logger;
     }
 
     /**
@@ -66,6 +81,7 @@ class WallService
         $newAttachments = '';
         foreach ($attachments as $attachment) {
             $newAttachments = $newAttachments.$this->getNewMediaId($attachment, $vk, $ownerId).',';
+            sleep(1);
         }
 
         return rtrim($newAttachments, ',');
@@ -90,7 +106,7 @@ class WallService
     }
 
     /**
-     * Добавляет запись из вк в базу данных
+     * Добавляет запись и з вк в базу данных
      *
      * @param $record
      */
@@ -125,5 +141,35 @@ class WallService
         $wallPost->setAttachments($postAttachment);
         $this->entityManager->persist($wallPost);
         $this->entityManager->flush();
+    }
+
+    public function createPost($destinationVkId, $sourceVkId, $lastPostVkId)
+    {
+        $ownerId   = $destinationVkId;
+
+        $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
+        $this->vk->setToken($vkToken->getAccessToken());
+
+        $post = $this->entityManager
+            ->getRepository('AppBundle:WallPost')
+            ->createQueryBuilder('e')
+            ->where('e.fromId = '.$sourceVkId)
+            ->andWhere('e.vkId > '.$lastPostVkId)
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+
+        //$attachments = $post->getAttachments();
+        $attachment = $this->createAttachmentToPost($post, $this->vk, $ownerId);
+        $params = [
+            'owner_id' => $ownerId,
+            'message' => $post->getText(),
+            'attachments' => $attachment,
+        ];
+        $res = $this->vk->request('wall.post', $params)->getResponse();
+        $post->setIsPosted(1);
+        $this->entityManager->flush();
+        $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$this->ownerId.'_'.$res->post_id);
     }
 }
