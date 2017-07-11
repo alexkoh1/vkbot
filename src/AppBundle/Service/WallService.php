@@ -56,14 +56,15 @@ class WallService
      *
      * @return mixed
      */
-    public function getPostsFromWall($count, $offSet, $ownerId, Core $vk) {
+    public function getPostsFromWall($count, $offSet, $ownerId) {
+        $this->vk->setToken('fbb3115711ee27ad33a15adec5a4184ee3a1adf0704a1032fd52d1d93b89a61014fcd3706378fefa02916');
         $params = [
             'owner_id' => $ownerId,
             'count'    => $count,
             'offset'   => $offSet,
             'filter'  => 'owner',
         ];
-        $result = $vk->request('wall.get', $params)->getResponse();
+        $result = $this->vk->request('wall.get', $params)->getResponse();
         rsort($result);
         return $result;
     }

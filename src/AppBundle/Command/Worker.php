@@ -60,15 +60,36 @@ class Worker extends Command
     {
         $currentTasks = $this->getCurrentTasks();
         foreach ($currentTasks as $task) {
-            $post = $this->taskRepository->getNextPost($task);
-            if ($this->wallService->createPost($task->getToId(), $post)) {
-                $taskLog = new TaskLog();
-                $taskLog->setRecordId($post);
-                $taskLog->setStatus(1);
-                $taskLog->setTaskId($task);
-                $taskLog->setTime(new \DateTime());
-                $this->entityManager->persist($taskLog);
-                $this->entityManager->flush();
+            $taskType = $task->getTaskType();
+            if ($taskType->getType() === 'copy_wall') {
+                $post = $this->taskRepository->getNextPost($task);
+                if ($this->wallService->createPost($task->getToId(), $post)) {
+                    $taskLog = new TaskLog();
+                    $taskLog->setRecordId($post);
+                    $taskLog->setStatus(1);
+                    $taskLog->setTaskId($task);
+                    $taskLog->setTime(new \DateTime());
+                    $this->entityManager->persist($taskLog);
+                    $this->entityManager->flush();
+                }
+            }
+
+            if ($taskType->getType() === 'parse_wall') {
+
+                $fromId        = $task->getFromId();
+                $recordsFromVk = $this->wallService->getPostsFromWall(40, 0, $fromId);
+
+                foreach ($recordsFromVk as $record) {
+                    $params = [
+                        'vkId'    => $record->id,
+                        'fromId' => $fromId,
+                    ];
+                    $post = $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
+                    if ($record->post_type == 'post' && !$post) {
+                        $this->wallService->addRecordToDb($record);
+                        //$this->logger->addInfo('Vk post');
+                    }
+                }
             }
 
         }
