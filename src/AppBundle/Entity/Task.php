@@ -18,12 +18,12 @@ class Task
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $fromId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $toId;
 
@@ -67,6 +67,8 @@ class Task
      * @ORM\Column(type="string", nullable=true)
      */
     private $status;
+
+
     /**
      * Get id
      *
@@ -80,7 +82,7 @@ class Task
     /**
      * Set fromId
      *
-     * @param string $fromId
+     * @param integer $fromId
      *
      * @return Task
      */
@@ -94,7 +96,7 @@ class Task
     /**
      * Get fromId
      *
-     * @return string
+     * @return integer
      */
     public function getFromId()
     {
@@ -104,7 +106,7 @@ class Task
     /**
      * Set toId
      *
-     * @param string $toId
+     * @param integer $toId
      *
      * @return Task
      */
@@ -118,7 +120,7 @@ class Task
     /**
      * Get toId
      *
-     * @return string
+     * @return integer
      */
     public function getToId()
     {
@@ -222,33 +224,9 @@ class Task
     }
 
     /**
-     * Set taskType
-     *
-     * @param \AppBundle\Entity\TaskType $taskType
-     *
-     * @return Task
-     */
-    public function setTaskType(\AppBundle\Entity\TaskType $taskType = null)
-    {
-        $this->taskType = $taskType;
-
-        return $this;
-    }
-
-    /**
-     * Get taskType
-     *
-     * @return \AppBundle\Entity\TaskType
-     */
-    public function getTaskType()
-    {
-        return $this->taskType;
-    }
-
-    /**
      * Set workingTimeFrom
      *
-     * @param \DateTime $workingTimeFrom
+     * @param string $workingTimeFrom
      *
      * @return Task
      */
@@ -262,7 +240,7 @@ class Task
     /**
      * Get workingTimeFrom
      *
-     * @return \DateTime
+     * @return string
      */
     public function getWorkingTimeFrom()
     {
@@ -272,7 +250,7 @@ class Task
     /**
      * Set workingTimeTo
      *
-     * @param \DateTime $workingTimeTo
+     * @param string $workingTimeTo
      *
      * @return Task
      */
@@ -286,7 +264,7 @@ class Task
     /**
      * Get workingTimeTo
      *
-     * @return \DateTime
+     * @return string
      */
     public function getWorkingTimeTo()
     {
@@ -315,5 +293,29 @@ class Task
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set taskType
+     *
+     * @param \AppBundle\Entity\TaskType $taskType
+     *
+     * @return Task
+     */
+    public function setTaskType(\AppBundle\Entity\TaskType $taskType = null)
+    {
+        $this->taskType = $taskType;
+
+        return $this;
+    }
+
+    /**
+     * Get taskType
+     *
+     * @return \AppBundle\Entity\TaskType
+     */
+    public function getTaskType()
+    {
+        return $this->taskType;
     }
 }

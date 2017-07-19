@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\TaskLog;
 use AppBundle\Entity\WallPost;
 use Doctrine\ORM\EntityManager;
 use getjump\Vk\Model\Wall;
@@ -21,36 +22,19 @@ class TaskRepository
     }
 
     /**
-     * Получает из базы пост для постинга
-     */
-    public function getPostToCreate($sourceVkId, $lastPostVkId) {
-        $post = $this->entityManager
-            ->getRepository('AppBundle:WallPost')
-            ->createQueryBuilder('e')
-            ->where('e.fromId = '.$sourceVkId)
-            ->andWhere('e.vkId > '.$lastPostVkId)
-            ->orderBy('e.id', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleResult();
-    }
-
-
-    /**
      * Получает vkId последней опубликованной от имени определенного пользователя записи
      *
-     * @param Task $task
+     * @param int $toId
      *
-     * @return WallPost
+     * @return int
      */
-    public function getNextPost(Task $task): WallPost
-    {
-        $fromId = $task->getFromId();
+    public function getLastPost(Task $task) {
+
         $entity = $this->entityManager
             ->getRepository('AppBundle:TaskLog')
             ->createQueryBuilder('e')
             ->join('e.recordId', 'r')
-            ->where('r.fromId = '.$fromId)
+            ->where('e.taskId = '.$task->getId())
             ->select('r.vkId')
             ->orderBy('e.id', 'DESC')
             ->setMaxResults(1)
@@ -63,16 +47,81 @@ class TaskRepository
             $lastPostVkId = 0;
         }
 
+        return $lastPostVkId;
+    }
+
+    /**
+     * Получает запись, следующую после vkId
+     *
+     * @param int $vkId
+     * @param int $fromId
+     *
+     * @return WallPost|null
+     */
+    public function getNextPost(int $vkId, int $fromId)
+    {
         $post = $this->entityManager
             ->getRepository('AppBundle:WallPost')
             ->createQueryBuilder('e')
             ->where('e.fromId = '.$fromId)
-            ->andWhere('e.vkId > '.$lastPostVkId)
+            ->andWhere('e.vkId > '.$vkId)
             ->orderBy('e.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
 
         return $post;
     }
+
+    /**
+     * Устанавливает время начала выполнения задания
+     *
+     * @param Task $task
+     */
+    public function setTimeStarted(Task $task) {
+        $task->setTimeStarted(new \DateTime('now'));
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Устанавливает время окончания выполнения задания
+     *
+     * @param Task $task
+     */
+    public function setTimeFinished(Task $task) {
+        $task->setTimeFinished(new \DateTime('now'));
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Добавляет запись в базу логов
+     *
+     * @param WallPost $post
+     * @param Task $task
+     */
+    public function addTaskLog(WallPost $post, Task $task)
+    {
+        $taskLog = new TaskLog();
+
+        $taskLog->setRecordId($post);
+        $taskLog->setStatus(1);
+        $taskLog->setTaskId($task);
+        $taskLog->setTime(new \DateTime());
+
+        $this->entityManager->persist($taskLog);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Обновляет статус задания
+     *
+     * @param string $status
+     * @param Task $task
+     */
+    public function setStatus(string $status, Task $task)
+    {
+        $task->setStatus($status);
+        $this->entityManager->flush();
+    }
+
 }

@@ -110,11 +110,17 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@app.wall_service'
-            - '@app.task_repository'
+            - '@app.task_service'
         tags:
             -  { name: console.command }
 
-    #репозиторий тасков
+    # Сервис тасков
+    app.task_service:
+        class: AppBundle\Service\TaskService
+        arguments:
+            - '@app.task_repository'
+
+    # Репозиторий тасков
     app.task_repository:
         class: AppBundle\Repository\TaskRepository
         arguments:

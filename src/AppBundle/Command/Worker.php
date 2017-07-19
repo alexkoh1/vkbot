@@ -8,6 +8,7 @@ use AppBundle\Entity\TaskLog;
 use AppBundle\Entity\WallPost;
 use AppBundle\Repository\TaskRepository;
 use AppBundle\Service\PhotoService;
+use AppBundle\Service\TaskService;
 use AppBundle\Service\WallService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
@@ -31,21 +32,20 @@ class Worker extends Command
 
     private $wallService;
 
-    private $taskRepository;
+    private $taskService;
 
     public function __construct(
         EntityManager $entityManager,
         WallService $wallService,
-        TaskRepository $taskRepository,
+        TaskService $taskService,
         $name = null)
     {
         parent::__construct($name);
 
         $this->entityManager  =  $entityManager;
         $this->wallService    =  $wallService;
-        $this->taskRepository = $taskRepository;
+        $this->taskService = $taskService;
     }
-
 
     protected function configure()
     {
@@ -60,17 +60,25 @@ class Worker extends Command
     {
         $currentTasks = $this->getCurrentTasks();
         foreach ($currentTasks as $task) {
+
             $taskType = $task->getTaskType();
+
             if ($taskType->getType() === 'copy_wall') {
-                $post = $this->taskRepository->getNextPost($task);
+
+                $lastPostVkId = $this->taskService->getLastPostId($task);
+                if ($lastPostVkId === 0) {
+                    $this->taskService->setTimeStarted($task);
+                }
+
+                $post = $this->taskService->getNextPost($lastPostVkId, $task);
+                if ($post === null) {
+                    $this->taskService->setTimeFinished($task);
+                    $this->taskService->setStatus('finished', $task);
+                    break;
+                }
+
                 if ($this->wallService->createPost($task->getToId(), $post)) {
-                    $taskLog = new TaskLog();
-                    $taskLog->setRecordId($post);
-                    $taskLog->setStatus(1);
-                    $taskLog->setTaskId($task);
-                    $taskLog->setTime(new \DateTime());
-                    $this->entityManager->persist($taskLog);
-                    $this->entityManager->flush();
+                    $this->taskService->addTaskLog($post, $task);
                 }
             }
 
@@ -149,7 +157,7 @@ class Worker extends Command
 
         $diff = $now->diff($lastTime);
 
-        if ($diff >= $pauseFrom) {
+        if ($diff >= $pauseFrom || $diff->s === 0) {
             return true;
         } else {
             return true;
