@@ -28,6 +28,31 @@ class Bot
     private $accessToken;
 
     /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $fio;
+
+    /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $appId;
+
+    /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $simId;
+
+    /**
      * Get id
      *
      * @return integer
@@ -83,5 +108,125 @@ class Bot
     public function getAccessToken()
     {
         return $this->accessToken;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Bot
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set fio
+     *
+     * @param string $fio
+     *
+     * @return Bot
+     */
+    public function setFio($fio)
+    {
+        $this->fio = $fio;
+
+        return $this;
+    }
+
+    /**
+     * Get fio
+     *
+     * @return string
+     */
+    public function getFio()
+    {
+        return $this->fio;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return Bot
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set appId
+     *
+     * @param string $appId
+     *
+     * @return Bot
+     */
+    public function setAppId($appId)
+    {
+        $this->appId = $appId;
+
+        return $this;
+    }
+
+    /**
+     * Get appId
+     *
+     * @return string
+     */
+    public function getAppId()
+    {
+        return $this->appId;
+    }
+
+    /**
+     * Set simId
+     *
+     * @param string $simId
+     *
+     * @return Bot
+     */
+    public function setSimId($simId)
+    {
+        $this->simId = $simId;
+
+        return $this;
+    }
+
+    /**
+     * Get simId
+     *
+     * @return string
+     */
+    public function getSimId()
+    {
+        return $this->simId;
     }
 }

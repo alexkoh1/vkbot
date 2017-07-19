@@ -65,6 +65,14 @@ services:
 
 
     #Комманда парсинга стены
+    app.create_task:
+        class: AppBundle\Command\CreateTask
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - console.command
+
+    #Комманда парсинга стены
     app.wall_parse:
         class: AppBundle\Command\WallParse
         arguments:
