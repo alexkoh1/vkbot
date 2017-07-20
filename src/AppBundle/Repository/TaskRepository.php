@@ -124,4 +124,24 @@ class TaskRepository
         $this->entityManager->flush();
     }
 
+    /**
+     * Получает текущие активные задания
+     *
+     * @return Task[]
+     */
+    public function getCurrentTask()
+    {
+        $params = [
+            'status' => 'running',
+        ];
+        return $this->entityManager->getRepository(Task::class)->findBy($params);
+        $currentTasks = [];
+        foreach ($tasks as $task)
+        {
+            if ($this->isInWorkingTime($task) && $this->isInPause($task)) {
+                $currentTasks [] = $task;
+            }
+        }
+    }
+
 }
