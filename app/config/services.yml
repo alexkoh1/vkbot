@@ -111,6 +111,7 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@app.wall_service'
             - '@app.task_service'
+            - '@logger'
         tags:
             -  { name: console.command }
 

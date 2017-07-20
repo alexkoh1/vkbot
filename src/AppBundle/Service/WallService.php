@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use getjump\Vk\Core;
 use Monolog\Logger;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class WallService
 {
@@ -147,12 +148,12 @@ class WallService
     /**
      * Создаёт пост на стене ВК
      *
-     * @param string   $destinationVkId
+     * @param int      $destinationVkId
      * @param WallPost $post
      *
-     * @return boolean
+     * @return mixed
      */
-    public function createPost(string $destinationVkId, WallPost $post)
+    public function createPost(int $destinationVkId, WallPost $post)
     {
         $ownerId = $destinationVkId;
         $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
@@ -165,8 +166,9 @@ class WallService
             'message' => $post->getText(),
             'attachments' => $attachment,
         ];
+
         $res = $this->vk->request('wall.post', $params)->getResponse();
-        $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId(). ' was copied to https://vk.com/wall'.$ownerId.'_'.$res->post_id);
-        return true;
+
+        return $res->post_id;
     }
 }

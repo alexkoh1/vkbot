@@ -1,30 +1,21 @@
 <?php
+
+declare(strict_types = 1);
+
 namespace AppBundle\Command;
 
-use AppBundle\AppBundle;
-use AppBundle\Entity\Attachment;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\TaskLog;
-use AppBundle\Entity\WallPost;
-use AppBundle\Repository\TaskRepository;
-use AppBundle\Service\PhotoService;
 use AppBundle\Service\TaskService;
 use AppBundle\Service\WallService;
-use Doctrine\Common\Collections\ArrayCollection;
+use DateTime;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use getjump\Vk\Core;
-use getjump\Vk\Model\Wall;
+use getjump\Vk\Exception\Error;
 use Monolog\Logger;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class Worker extends Command
 {
@@ -34,17 +25,21 @@ class Worker extends Command
 
     private $taskService;
 
+    private $logger;
+
     public function __construct(
         EntityManager $entityManager,
-        WallService $wallService,
-        TaskService $taskService,
+        WallService   $wallService,
+        TaskService   $taskService,
+        Logger        $logger,
         $name = null)
     {
         parent::__construct($name);
 
-        $this->entityManager  =  $entityManager;
-        $this->wallService    =  $wallService;
-        $this->taskService = $taskService;
+        $this->entityManager = $entityManager;
+        $this->wallService   = $wallService;
+        $this->taskService   = $taskService;
+        $this->logger        = $logger;
     }
 
     protected function configure()
@@ -68,18 +63,30 @@ class Worker extends Command
                 $lastPostVkId = $this->taskService->getLastPostId($task);
                 if ($lastPostVkId === 0) {
                     $this->taskService->setTimeStarted($task);
+                    $now = new DateTime('now');
+                    $this->logger->addInfo('Task #'.$task->getId().' was started at '.$now->format('Y-m-d H:i'));
                 }
 
                 $post = $this->taskService->getNextPost($lastPostVkId, $task);
                 if ($post === null) {
                     $this->taskService->setTimeFinished($task);
                     $this->taskService->setStatus('finished', $task);
+                    $now = new DateTime('now');
+                    $this->logger->addInfo('Task #'.$task->getId().' was finished at '.$now->format('Y-m-d H:i'));
                     break;
                 }
 
-                if ($this->wallService->createPost($task->getToId(), $post)) {
-                    $this->taskService->addTaskLog($post, $task);
+                 try {
+                    $res = $this->wallService->createPost($task->getToId(), $post);
+                } catch (Error $e) {
+                    $this->logger->addInfo('Post #'.$post->getId().' creation failed. Error message: '.$e->getMessage());
+                    break;
                 }
+
+                $this->taskService->addTaskLog($post, $task);
+                $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId()
+                    .' was copied to https://vk.com/wall'.$task->getToId().'_'.$res);
+                break;
             }
 
             if ($taskType->getType() === 'parse_wall') {
