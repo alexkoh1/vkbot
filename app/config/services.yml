@@ -64,11 +64,12 @@ services:
             - '@logger'
 
 
-    #Комманда парсинга стены
+    # Комманда создания нового задания
     app.create_task:
         class: AppBundle\Command\CreateTask
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '@app.user_service'
         tags:
             - console.command
 
@@ -126,3 +127,15 @@ services:
         class: AppBundle\Repository\TaskRepository
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    # Сервис пользователей вк
+    app.user_service:
+        class: AppBundle\Service\UserService
+        arguments:
+            - '@app.user_repository'
+
+    # Репозиторий пользователей ВК
+    app.user_repository:
+        class: AppBundle\Repository\UserRepository
+        arguments:
+            - '@app.vk_service_factory'

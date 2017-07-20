@@ -7,6 +7,7 @@ namespace AppBundle\Command;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\TaskType;
 use AppBundle\Entity\WallPost;
+use AppBundle\Service\UserService;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,11 +21,14 @@ class CreateTask extends Command
 
     private $entityManager;
 
-    public function __construct(EntityManager $entityManager, $name = null)
+    private $userService;
+
+    public function __construct(EntityManager $entityManager, UserService $userService, $name = null)
     {
         parent::__construct($name);
 
         $this->entityManager = $entityManager;
+        $this->userService   = $userService;
     }
 
     protected function configure()
@@ -43,23 +47,10 @@ class CreateTask extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        /*$workingTime = explode('-', $input->getArgument('working_time'));
-
-        $task = new Task();
-
-        $task->setFromId($input->getArgument('from_id'));
-        $task->setTaskType($this->getTaskType($input->getArgument('task_type')));
-        $task->setToId($input->getArgument('to_id'));
-        $task->setWorkingTimeFrom($workingTime[0]);
-        $task->setWorkingTimeTo($workingTime[1]);
-        $task->setPauseFrom($input->getArgument('pause_from'));*/
-
         $helper = $this->getHelper('question');
-        var_dump($this->getFromId());
 
-        $question = new ChoiceQuestion('Введите id страницы-источника: ', $this->getFromId());
-        $fromId = $helper->ask($input, $output, $question);
+        $question = new ChoiceQuestion('Введите id страницы-источника:', $this->getFromId());
+        $fromId = explode(' ', $helper->ask($input, $output, $question))[0];
 
         $question = new Question('Введите id страницы-назначения: ');
         $toId = $helper->ask($input, $output, $question);
@@ -77,7 +68,6 @@ class CreateTask extends Command
         $question = new Question('Введите паузу: ', '4');
         $pause = $helper->ask($input, $output, $question);
 
-
         $workingTime = explode('-', $workingTime);
         $task = new Task();
         $task->setFromId($fromId);
@@ -87,6 +77,7 @@ class CreateTask extends Command
         $task->setWorkingTimeTo($workingTime[1]);
         $task->setPauseFrom($pause);
         $task->setPauseTo(0);
+        $task->setStatus('running');
 
         $this->entityManager->persist($task);
         $this->entityManager->flush();
@@ -100,7 +91,6 @@ class CreateTask extends Command
 
     private function getFromId()
     {
-
         $result = $this->entityManager->getRepository(WallPost::class)
             ->createQueryBuilder('u')
             ->select('u.fromId')
@@ -113,6 +103,14 @@ class CreateTask extends Command
             $fromIdArray[] = $data['fromId'];
         }
 
-        return $fromIdArray;
+        $userList = [];
+        foreach ($fromIdArray as $fromId) {
+            $userInfo = $this->userService->getUserFio($fromId);
+            $userList[] = $fromId.' https://vk.com/id'.$fromId.' '.$userInfo[0]->first_name.' '.$userInfo[0]->last_name;
+        }
+
+        return $userList;
+
+
     }
 }

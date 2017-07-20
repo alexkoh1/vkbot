@@ -76,17 +76,17 @@ class Worker extends Command
                     break;
                 }
 
-                 try {
+                try {
                     $res = $this->wallService->createPost($task->getToId(), $post);
                 } catch (Error $e) {
                     $this->logger->addInfo('Post #'.$post->getId().' creation failed. Error message: '.$e->getMessage());
-                    break;
+                    continue;
                 }
 
                 $this->taskService->addTaskLog($post, $task);
                 $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId()
                     .' was copied to https://vk.com/wall'.$task->getToId().'_'.$res);
-                break;
+                continue;
             }
 
             if ($taskType->getType() === 'parse_wall') {
@@ -136,14 +136,14 @@ class Worker extends Command
         $startWorkingTime = $task->getWorkingTimeFrom();
         $endWorkingTime   = $task->getWorkingTimeTo();
 
-        $start_time = new \DateTime('today '.$startWorkingTime);
-        $end_time   = new \DateTime('today '.$endWorkingTime);
-        $now        = new \DateTime();
+        $start_time = new DateTime('today '.$startWorkingTime);
+        $end_time   = new DateTime('today '.$endWorkingTime);
+        $now        = new DateTime();
 
         if ($start_time <= $now && $now < $end_time) {
             return true;
         } else {
-            return true;
+            return false;
         }
     }
 
@@ -152,22 +152,24 @@ class Worker extends Command
         $params = [
             'taskId' => $task->getId()
         ];
+
         $lastLog = $this->entityManager->getRepository(TaskLog::class)->findOneBy($params, ['id' => 'DESC']);
+
         if ($lastLog) {
             $lastTime = $lastLog->getTime();
         } else {
-            $lastTime = new \DateTime();
+            $lastTime = new DateTime('now');
         }
-        $pauseFrom = new \DateInterval('PT'.($task->getPauseFrom()).'H');
-        $pauseTo   = new \DateInterval('PT'.($task->getPauseTo()). 'H');
-        $now = new \DateTime();
 
-        $diff = $now->diff($lastTime);
+        $pauseFrom =$task->getPauseFrom() * 3600;
+        $now = new DateTime('now');
 
-        if ($diff >= $pauseFrom || $diff->s === 0) {
+        $diff = $now->getTimestamp() - $lastTime->getTimestamp();
+
+        if ($diff >= $pauseFrom || $diff < 2 ) {
             return true;
         } else {
-            return true;
+            return false;
         }
     }
 }
