@@ -80,10 +80,13 @@ class Worker extends Command
                     $res = $this->wallService->createPost($task->getToId(), $post);
                 } catch (Error $e) {
                     $this->logger->addInfo('Post #'.$post->getId().' creation failed. Error message: '.$e->getMessage());
+                    $status = false;
+                    $this->taskService->addTaskLog($post, $task, $status);
                     continue;
                 }
 
-                $this->taskService->addTaskLog($post, $task);
+                $status = true;
+                $this->taskService->addTaskLog($post, $task, $status);
                 $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId()
                     .' was copied to https://vk.com/wall'.$task->getToId().'_'.$res);
                 continue;
@@ -100,7 +103,7 @@ class Worker extends Command
                         'fromId' => $fromId,
                     ];
                     $post = $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
-                    if ($record->post_type == 'post' && !$post) {
+                    if ($record->post_type == 'post' && !$post && !empty($record->message)) {
                         $this->wallService->addRecordToDb($record);
                         //$this->logger->addInfo('Vk post');
                     }
@@ -143,7 +146,7 @@ class Worker extends Command
         if ($start_time <= $now && $now < $end_time) {
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 

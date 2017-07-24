@@ -80,6 +80,10 @@ class WallService
      */
     public function createAttachmentToPost(WallPost $wallPost, Core $vk, string $ownerId){
         $attachments   = $wallPost->getAttachments();
+
+        if ($attachments->isEmpty()) {
+            return null;
+        }
         $newAttachments = '';
         foreach ($attachments as $attachment) {
             $newAttachments = $newAttachments.$this->getNewMediaId($attachment, $vk, $ownerId).',';
@@ -159,13 +163,18 @@ class WallService
         $vkToken = $this->entityManager->getRepository('AppBundle\Entity\Bot')->findOneByVkId($destinationVkId);
         $this->vk->setToken($vkToken->getAccessToken());
 
-        //$attachments = $post->getAttachments();
-        $attachment = $this->createAttachmentToPost($post, $this->vk, $ownerId);
-        $params = [
-            'owner_id' => $ownerId,
-            'message' => $post->getText(),
-            'attachments' => $attachment,
-        ];
+        if ($attachment = $this->createAttachmentToPost($post, $this->vk, $ownerId)) {
+            $params = [
+                'owner_id' => $ownerId,
+                'message' => $post->getText(),
+                'attachments' => $attachment
+            ];
+        } else {
+            $params = [
+                'owner_id' => $ownerId,
+                'message' => $post->getText(),
+            ];
+        }
 
         $res = $this->vk->request('wall.post', $params)->getResponse();
 

@@ -6,6 +6,7 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\TaskLog;
 use AppBundle\Entity\WallPost;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use getjump\Vk\Model\Wall;
 
@@ -24,7 +25,7 @@ class TaskRepository
     /**
      * Получает vkId последней опубликованной от имени определенного пользователя записи
      *
-     * @param int $toId
+     * @param Task $task
      *
      * @return int
      */
@@ -98,15 +99,16 @@ class TaskRepository
      *
      * @param WallPost $post
      * @param Task $task
+     * @param bool $status
      */
-    public function addTaskLog(WallPost $post, Task $task)
+    public function addTaskLog(WallPost $post, Task $task, bool $status)
     {
         $taskLog = new TaskLog();
 
         $taskLog->setRecordId($post);
-        $taskLog->setStatus(1);
+        $taskLog->setStatus($status);
         $taskLog->setTaskId($task);
-        $taskLog->setTime(new \DateTime());
+        $taskLog->setTime(new DateTime());
 
         $this->entityManager->persist($taskLog);
         $this->entityManager->flush();
