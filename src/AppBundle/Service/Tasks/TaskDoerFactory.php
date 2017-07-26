@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace AppBundle\Service\Tasks;
 
 use AppBundle\Entity\Task;
+use AppBundle\Repository\TaskRepository;
 use AppBundle\Service\TaskService;
 use AppBundle\Service\WallService;
 use Monolog\Logger;
@@ -27,9 +28,9 @@ class TaskDoerFactory
     }
 
 
-    public function createDoer(Task $task, TaskService $taskService) {
+    public function createDoer(Task $task, TaskRepository $taskRepository) {
         if ($task->getTaskType()->getType() === 'copy_wall') {
-            return new CopyWall($this->wallService, $taskService, $this->logger, $task);
+            return new CopyWall($this->wallService, $taskRepository, $this->logger, $task);
         }
             return 'hui';
     }

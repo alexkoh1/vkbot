@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace AppBundle\Service\Tasks;
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\WallPost;
 use DateTime;
 
 trait TaskTrait
@@ -16,10 +17,10 @@ trait TaskTrait
      *
      * @return bool
      */
-    private function taskIsInWorkingTime(Task $task)
+    private function taskIsInWorkingTime()
     {
-        $startWorkingTime = $task->getWorkingTimeFrom();
-        $endWorkingTime   = $task->getWorkingTimeTo();
+        $startWorkingTime = $this->task->getWorkingTimeFrom();
+        $endWorkingTime   = $this->task->getWorkingTimeTo();
 
         $start_time = new DateTime('today '.$startWorkingTime);
         $end_time   = new DateTime('today '.$endWorkingTime);
@@ -28,7 +29,7 @@ trait TaskTrait
         if ($start_time <= $now && $now < $end_time) {
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -38,9 +39,9 @@ trait TaskTrait
      * @param Task $task
      * @return bool
      */
-    private function taskIsInPause(Task $task)
+    private function taskIsInPause()
     {
-        $lastLog = $this->taskService->getLastLogId($task);
+        $lastLog = $this->getLastLogId();
 
         if ($lastLog) {
             $lastTime = $lastLog->getTime();
@@ -48,7 +49,7 @@ trait TaskTrait
             $lastTime = new DateTime('now');
         }
 
-        $pauseFrom =$task->getPauseFrom() * 3600;
+        $pauseFrom =$this->task->getPauseFrom() * 3600;
         $now = new DateTime('now');
 
         $diff = $now->getTimestamp() - $lastTime->getTimestamp();
@@ -56,15 +57,82 @@ trait TaskTrait
         if ($diff >= $pauseFrom || $diff < 2 ) {
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 
+    /**
+     * Проверяет должно ли выполняться задание в текущей итерации
+     *
+     * @return bool
+     */
     public function isDoneble() {
-        if ($this->taskIsInPause($this->task) && $this->taskIsInWorkingTime($this->task)) {
+        if ($this->taskIsInPause() && $this->taskIsInWorkingTime()) {
                 return true;
         }
         return false;
     }
+
+    /**
+     * Устанавливает время начала выполнения задания
+     */
+    public function setTimeStarted() {
+        $this->taskRepository->setTimeStarted($this->task);
+    }
+
+    /**
+     * Устанавливает время окончания выполнения задания
+     *
+     * @param Task $task
+     */
+    public function setTimeFinished() {
+        $this->taskRepository->setTimeFinished($this->task);
+    }
+
+    /**
+     * Меняет статус задания
+     */
+    public function setStatus(string $status)
+    {
+        $this->taskRepository->setStatus($status, $this->task);
+    }
+
+    /**
+     * Получает vkId последней опубликованной от имени определенного пользователя записи
+     *
+     * @param Task $task
+     *
+     * @return int
+     */
+    public function getLastPostId() {
+        return $this->taskRepository->getLastPost($this->task);
+    }
+
+    /**
+     * Получает id послденей опубликованной записи
+     */
+    public function getLastLogId() {
+        return $this->taskRepository->getLastLogId($this->task);
+    }
+
+    /**
+     * Получает запись для публикации
+     *
+     * @param $lastPostVkId
+     * @param Task $task
+     *
+     * @return WallPost|null
+     */
+    public function getNextPost($lastPostVkId) {
+        return $this->taskRepository->getNextPost($lastPostVkId, $this->task->getFromId());
+    }
+
+    /**
+     * Добавляет новую запись в базу логов
+     */
+    public function addTaskLog(WallPost $post, bool $status) {
+        $this->taskRepository->addTaskLog($post, $this->task, $status);
+    }
+
 
 }

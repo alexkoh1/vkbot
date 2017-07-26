@@ -6,6 +6,8 @@ namespace AppBundle\Service\Tasks;
 
 use AppBundle\Entity\Task;
 use AppBundle\Entity\TaskType;
+use AppBundle\Entity\WallPost;
+use AppBundle\Repository\TaskRepository;
 use AppBundle\Service\TaskService;
 use AppBundle\Service\WallService;
 use DateTime;
@@ -22,11 +24,6 @@ class CopyWall implements TaskInterface
     private $wallService;
 
     /**
-     * @var TaskService
-     */
-    private $taskService;
-
-    /**
      * @var Logger
      */
     private $logger;
@@ -37,39 +34,43 @@ class CopyWall implements TaskInterface
     private $task;
 
     /**
+     * @var TaskRepository
+     */
+    private $taskRepository;
+
+    /**
      * CopyWall constructor.
      *
      * @param WallService $wallService
-     * @param TaskService $taskService
      * @param Logger      $logger
      * @param Task        $task
      */
     public function __construct(
         WallService $wallService,
-        TaskService $taskService,
+        TaskRepository $taskRepository,
         Logger      $logger,
         Task $task
     ) {
         $this->task = $task;
         $this->wallService = $wallService;
-        $this->taskService = $taskService;
         $this->logger      = $logger;
+        $this->taskRepository = $taskRepository;
     }
 
 
     public function do()
     {
-        $lastPostVkId = $this->taskService->getLastPostId($this->task);
+        $lastPostVkId = $this->getLastPostId();
         if ($lastPostVkId === 0) {
-            $this->taskService->setTimeStarted($this->task);
+            $this->setTimeStarted();
             $now = new DateTime('now');
             $this->logger->addInfo('Task #'.$this->task->getId().' was started at '.$now->format('Y-m-d H:i'));
         }
 
-        $post = $this->taskService->getNextPost($lastPostVkId, $this->task);
+        $post = $this->getNextPost($lastPostVkId);
         if ($post === null) {
-            $this->taskService->setTimeFinished($this->task);
-            $this->taskService->setStatus('finished', $this->task);
+            $this->setTimeFinished();
+            $this->setStatus('finished');
             $now = new DateTime('now');
             $this->logger->addInfo('Task #'.$this->task->getId().' was finished at '.$now->format('Y-m-d H:i'));
             return;
@@ -80,12 +81,13 @@ class CopyWall implements TaskInterface
         } catch (Error $e) {
             $this->logger->addInfo('Post #'.$post->getId().' creation failed. Error message: '.$e->getMessage());
             $status = false;
-            $this->taskService->addTaskLog($post, $this->task, $status);
+            $this->addTaskLog($post, $status);
         }
 
         $status = true;
-        $this->taskService->addTaskLog($post, $this->task, $status);
+        $this->addTaskLog($post, $status);
         $this->logger->addInfo('Wall post https://vk.com/wall'.$post->getFromId().'_'.$post->getVkId()
             .' was copied to https://vk.com/wall'.$this->task->getToId().'_'.$res);
     }
+
 }
