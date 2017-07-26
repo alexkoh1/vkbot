@@ -6,6 +6,7 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\TaskLog;
 use AppBundle\Entity\WallPost;
+use AppBundle\Service\Tasks\TaskDoerFactory;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use getjump\Vk\Model\Wall;
@@ -17,9 +18,35 @@ class TaskRepository
      */
     private $entityManager;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(
+        EntityManager   $entityManager
+    )
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * Получает id последней опубликованной записи
+     *
+     * @return TaskLog
+     */
+    public function getLastLogId(Task $task) {
+        $params = [
+            'taskId' => $task->getId()
+        ];
+
+        return $this->entityManager->getRepository(TaskLog::class)->findOneBy($params, ['id' => 'DESC']);
+    }
+
+    /**
+     * Получает vkId опубликованной записи
+     */
+    public function getVkIdByTaskLog(TaskLog $taskLog) {
+        $params = [
+            'id' => $taskLog->getTaskId()
+        ];
+
+        return $this->entityManager->getRepository(Task::class)->findOneBy($params, ['id' => 'DESC']);
     }
 
     /**
@@ -90,7 +117,7 @@ class TaskRepository
      * @param Task $task
      */
     public function setTimeFinished(Task $task) {
-        $task->setTimeFinished(new \DateTime('now'));
+        $task->setTimeFinished(new DateTime('now'));
         $this->entityManager->flush();
     }
 
@@ -131,19 +158,12 @@ class TaskRepository
      *
      * @return Task[]
      */
-    public function getCurrentTask()
+    public function getCurrentTasks()
     {
         $params = [
             'status' => 'running',
         ];
-        return $this->entityManager->getRepository(Task::class)->findBy($params);
-        $currentTasks = [];
-        foreach ($tasks as $task)
-        {
-            if ($this->isInWorkingTime($task) && $this->isInPause($task)) {
-                $currentTasks [] = $task;
-            }
-        }
-    }
 
+        return $this->entityManager->getRepository(Task::class)->findBy($params);
+    }
 }

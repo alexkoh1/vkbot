@@ -113,6 +113,7 @@ services:
             - '@app.wall_service'
             - '@app.task_service'
             - '@logger'
+
         tags:
             -  { name: console.command }
 
@@ -121,12 +122,14 @@ services:
         class: AppBundle\Service\TaskService
         arguments:
             - '@app.task_repository'
+            - '@app.doer_factory'
 
     # Репозиторий тасков
     app.task_repository:
         class: AppBundle\Repository\TaskRepository
         arguments:
             - '@doctrine.orm.entity_manager'
+
 
     # Сервис пользователей вк
     app.user_service:
@@ -139,3 +142,11 @@ services:
         class: AppBundle\Repository\UserRepository
         arguments:
             - '@app.vk_service_factory'
+
+    # Фабрика создания дуеров-хуюеров
+    app.doer_factory:
+        class: AppBundle\Service\Tasks\TaskDoerFactory
+        public: false
+        arguments:
+            - '@app.wall_service'
+            - '@logger'

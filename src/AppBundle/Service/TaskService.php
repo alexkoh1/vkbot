@@ -5,8 +5,12 @@ namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\TaskLog;
 use AppBundle\Entity\WallPost;
 use AppBundle\Repository\TaskRepository;
+use AppBundle\Service\Tasks\CopyWall;
+use AppBundle\Service\Tasks\ParseWall;
+use AppBundle\Service\Tasks\TaskDoerFactory;
 use DateTime;
 
 class TaskService
@@ -14,9 +18,15 @@ class TaskService
 
     private $taskRepository;
 
-    public function __construct(TaskRepository $taskRepository)
+    private $doerFactory;
+
+    public function __construct(
+        TaskRepository $taskRepository,
+        TaskDoerFactory $doerFactory
+    )
     {
         $this->taskRepository = $taskRepository;
+        $this->doerFactory = $doerFactory;
     }
 
 
@@ -29,6 +39,13 @@ class TaskService
      */
     public function getLastPostId(Task $task) {
         return $this->taskRepository->getLastPost($task);
+    }
+
+    /**
+     * Получает id послденей опубликованной записи
+     */
+    public function getLastLogId(Task $task) {
+        return $this->taskRepository->getLastLogId($task);
     }
 
     /**
@@ -64,8 +81,8 @@ class TaskService
     /**
      * Добавляет новую запись в базу логов
      */
-    public function addTaskLog(WallPost $post, Task $task) {
-        $this->taskRepository->addTaskLog($post, $task);
+    public function addTaskLog(WallPost $post, Task $task, bool $status) {
+        $this->taskRepository->addTaskLog($post, $task, $status);
     }
 
     /**
@@ -78,70 +95,36 @@ class TaskService
 
     /**
      * Получает текущие активные задания
+     *
+     * return TaskInterface[]
      */
-    public function getCurrentTask() {
-        $currentTasks = $this->taskRepository->getCurrentTask();
+    public function getCurrentTasks(): array
+    {
+        $currentTasks = $this->taskRepository->getCurrentTasks();
+
+        $taskCollection = [];
+
         foreach ($currentTasks as $task) {
-            if ($this->taskIsInWorkingTime($task) && $this->taskIsInPause($task)) {
-                
+            $taskCollection[] =  $this->doerFactory->createDoer($task, $this);
+        }
+
+        return $taskCollection;
+
+        /*foreach ($currentTasks as $task) {
+
+            $filterCurrentTasks[] = $this->doerFactory->createDoer($task);
+
+            /*if ($this->taskIsInWorkingTime($task) && $this->taskIsInPause($task)) {
+                if ($task->getTaskType() === 'copy_wall') {
+                    $filterCurrentTasks[] = TaskDoerFactory::createDoer($task)
+                    continue;
+                }
+                if ($task->getTaskType() === 'parse_wall') {
+                    $filterCurrentTasks[] = new ParseWall($task);
+                    continue;
+                }
             }
-        }
+        }*/
 
     }
-
-    /**
-     * Проверяет, что текущее время рабочее для задания
-     *
-     * @param Task $task
-     *
-     * @return bool
-     */
-    private function taskIsInWorkingTime(Task $task)
-    {
-        $startWorkingTime = $task->getWorkingTimeFrom();
-        $endWorkingTime   = $task->getWorkingTimeTo();
-
-        $start_time = new DateTime('today '.$startWorkingTime);
-        $end_time   = new DateTime('today '.$endWorkingTime);
-        $now        = new DateTime();
-
-        if ($start_time <= $now && $now < $end_time) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Проверяет, что с момента последнего выполнения задания прошло время, настроенное в параметрах
-     *
-     * @param Task $task
-     * @return bool
-     */
-    private function taskIsInPause(Task $task)
-    {
-        $params = [
-            'taskId' => $task->getId()
-        ];
-
-        $lastLog = $this->entityManager->getRepository(TaskLog::class)->findOneBy($params, ['id' => 'DESC']);
-
-        if ($lastLog) {
-            $lastTime = $lastLog->getTime();
-        } else {
-            $lastTime = new DateTime('now');
-        }
-
-        $pauseFrom =$task->getPauseFrom() * 3600;
-        $now = new DateTime('now');
-
-        $diff = $now->getTimestamp() - $lastTime->getTimestamp();
-
-        if ($diff >= $pauseFrom || $diff < 2 ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-use AppBundle\Entity\Task;
+namespace AppBundle\Service\Tasks;
 
 interface TaskInterface
 {
-    public function do(Task $task);
+    public function do();
 }

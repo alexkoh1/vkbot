@@ -302,7 +302,7 @@ class Task
      *
      * @return Task
      */
-    public function setTaskType(\AppBundle\Entity\TaskType $taskType = null)
+    public function setTaskType(TaskType $taskType = null)
     {
         $this->taskType = $taskType;
 
@@ -312,7 +312,7 @@ class Task
     /**
      * Get taskType
      *
-     * @return \AppBundle\Entity\TaskType
+     * @return TaskType
      */
     public function getTaskType()
     {
