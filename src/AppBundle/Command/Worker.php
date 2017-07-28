@@ -59,10 +59,14 @@ class Worker extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $currentTasks = $this->taskService->getCurrentTasks();
+        $this->logger->addInfo('Starting new iteration');
         foreach ($currentTasks as $task) {
             if ($task->isDoneble() ) {
+                $this->logger->addInfo('Task #'.$task->getTaskId().' started.');
                 $task->do();
+                $this->logger->addInfo('Task #'.$task->getTaskId().' ended.');
             }
         }
+        $this->logger->addInfo('Iteration ended.');
     }
 }

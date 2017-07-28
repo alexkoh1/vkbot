@@ -142,5 +142,12 @@ trait TaskTrait
         $this->taskRepository->addTaskLog($post, $this->task, $status);
     }
 
+    public function getTaskId() {
+        return $this->task->getId();
+    }
+
+    public function getTaskType() {
+        return $this->task->getTaskType()->getId();
+    }
 
 }
