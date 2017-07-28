@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Bot;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\TaskType;
 use AppBundle\Entity\WallPost;
@@ -49,10 +50,12 @@ class CreateTask extends Command
     {
         $helper = $this->getHelper('question');
 
-        $question = new ChoiceQuestion('Введите id страницы-источника:', $this->getFromId());
-        $fromId = explode(' ', $helper->ask($input, $output, $question))[0];
+        $question = new Question('Введите id страницы-источника:');
+        print_r($this->getFromId());
+        $fromId = $helper->ask($input, $output, $question);//explode(' ', $helper->ask($input, $output, $question))[0];
 
         $question = new Question('Введите id страницы-назначения: ');
+        print_r($this->getToId());
         $toId = $helper->ask($input, $output, $question);
 
         $question = new ChoiceQuestion('Выберите тип задания: ',
@@ -110,7 +113,27 @@ class CreateTask extends Command
         }
 
         return $userList;
+    }
 
+    private function getToId()
+    {
+        $result = $this->entityManager->getRepository(Bot::class)
+            ->createQueryBuilder('u')
+            ->select('u.vkId')
+            ->getQuery()
+            ->getResult();
 
+        $fromIdArray = [];
+        foreach ($result as $data) {
+            $fromIdArray[] = $data['vkId'];
+        }
+
+        $userList = [];
+        foreach ($fromIdArray as $fromId) {
+            $userInfo = $this->userService->getUserFio((int) $fromId);
+            $userList[] = $fromId.' https://vk.com/id'.$fromId.' '.$userInfo[0]->first_name.' '.$userInfo[0]->last_name;
+        }
+
+        return $userList;
     }
 }

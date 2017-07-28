@@ -36,6 +36,7 @@ class ParseWall implements TaskInterface
 
     public function do()
     {
+        $this->setTimeStarted();
         $fromId        = $this->task->getFromId();
         $recordsFromVk = $this->wallService->getPostsFromWall(80, 0, $fromId);
         $this->setTimeStarted();
