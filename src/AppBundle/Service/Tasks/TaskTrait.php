@@ -22,15 +22,19 @@ trait TaskTrait
         $startWorkingTime = $this->task->getWorkingTimeFrom();
         $endWorkingTime   = $this->task->getWorkingTimeTo();
 
+        if ($startWorkingTime === $endWorkingTime) {
+            return true;
+        }
+
         $start_time = new DateTime('today '.$startWorkingTime);
         $end_time   = new DateTime('today '.$endWorkingTime);
         $now        = new DateTime();
 
         if ($start_time <= $now && $now < $end_time) {
             return true;
-        } else {
-            return true;
         }
+
+        return false;
     }
 
     /**
@@ -41,6 +45,10 @@ trait TaskTrait
      */
     private function taskIsInPause()
     {
+        if ($this->task->getPauseFrom() === 0) {
+            return true;
+        }
+
         $lastLog = $this->getLastLogId();
 
         if ($lastLog) {
@@ -56,9 +64,9 @@ trait TaskTrait
 
         if ($diff >= $pauseFrom || $diff < 2 ) {
             return true;
-        } else {
-            return true;
         }
+
+        return false;
     }
 
     /**

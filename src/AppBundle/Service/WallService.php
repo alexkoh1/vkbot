@@ -180,4 +180,14 @@ class WallService
 
         return $res->post_id;
     }
+
+    /**
+     * Ищет запись по параметрам
+     *
+     * @return WallPost[]
+     */
+    public function getPostByParams($params): array
+    {
+        return $this->entityManager->getRepository('AppBundle\Entity\WallPost')->findBy($params);
+    }
 }

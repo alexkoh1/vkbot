@@ -32,6 +32,10 @@ class TaskDoerFactory
         if ($task->getTaskType()->getType() === 'copy_wall') {
             return new CopyWall($this->wallService, $taskRepository, $this->logger, $task);
         }
-            return 'hui';
+        if ($task->getTaskType()->getType() === 'parse_wall') {
+            return new ParseWall($task, $this->wallService, $taskRepository, $this->logger);
+        }
+
+        return 'hui';
     }
 }
